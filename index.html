@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abel's Digital Garage // Premium Registry</title>
+<title>Abel's Digital Garage</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -34,12 +34,16 @@ body { font-family: 'Inter', sans-serif; color: var(--text-main); letter-spacing
 .spec-bar-fill { height: 100%; background: var(--text-main); transition: width 1.3s cubic-bezier(0.16, 1, 0.3, 1); }
 .floating-hud { position: absolute; font-family: 'Space Grotesk', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.15em; color: rgba(255,255,255,0.25); pointer-events: none; text-transform: uppercase; }
 .tag-badge { display: inline-flex; align-items: center; font-family: 'Space Grotesk', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 0px; text-transform: uppercase; }
-.viewer-wrapper { position: relative; width: 100%; padding-bottom: 60%; background: radial-gradient(circle at 50% 50%, #1a1a1e 0%, var(--dark-bg) 80%); overflow: hidden; min-height: 300px; display: flex; align-items: center; justify-content: center; }
-.viewer-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-.viewer-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; pointer-events: none; z-index: 1; transition: opacity 0.5s ease; background: var(--dark-bg); }
-.loader-ring { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.05); border-top-color: var(--text-main); border-radius: 50%; animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@media (max-width: 768px) { .viewer-wrapper { padding-bottom: 75%; } }
+.viewer-container { position: relative; width: 100%; padding-bottom: 60%; background: radial-gradient(circle at 50% 50%, #1a1a1e 0%, var(--dark-bg) 80%); overflow: hidden; min-height: 300px; }
+.viewer-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: grab; }
+.viewer-wrapper:active { cursor: grabbing; }
+.viewer-slide { position: relative; min-width: 100%; height: 100%; flex-shrink: 0; }
+.viewer-slide img { width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; user-select: none; }
+.nav-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(18, 18, 20, 0.7); border: 1px solid var(--dark-border); color: #fff; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.3s; cursor: pointer; }
+.nav-arrow:hover { background: rgba(28, 28, 30, 0.9); border-color: #44444a; }
+.nav-arrow.prev { left: 12px; }
+.nav-arrow.next { right: 12px; }
+@media (max-width: 768px) { .viewer-container { padding-bottom: 75%; } .nav-arrow { width: 38px; height: 38px; } }
 </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
@@ -47,7 +51,7 @@ body { font-family: 'Inter', sans-serif; color: var(--text-main); letter-spacing
 <header class="border-b border-[var(--dark-border)] px-6 md:px-12 py-4 flex items-center justify-between sticky top-0 z-50" style="background:rgba(11,11,12,0.85); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);">
   <div class="flex items-center gap-6">
     <span class="font-grotesk text-xs font-bold tracking-[0.3em] uppercase">ABEL'S DIGITAL GARAGE</span>
-    <span class="font-grotesk text-[10px] tracking-widest text-neutral-600 hidden md:inline">/ HIGH PERFORMANCE SPECIFICATION REGISTER</span>
+    <span class="font-grotesk text-[10px] tracking-widest text-neutral-600 hidden md:inline">HIGH PERFORMANCE SPECIFICATION REGISTER</span>
   </div>
   <div class="flex items-center gap-6">
     <span class="font-grotesk text-[10px] tracking-widest text-neutral-500">CONNECTED</span>
@@ -59,14 +63,14 @@ body { font-family: 'Inter', sans-serif; color: var(--text-main); letter-spacing
   <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
     <div>
       <h1 class="font-serif text-4xl md:text-5xl font-normal tracking-tight text-white italic">The Collection.</h1>
-      <p class="font-grotesk text-[10px] tracking-[0.15em] text-neutral-500 mt-2 uppercase">/ Curated Portfolio — Private Garage Archive</p>
+      <p class="font-grotesk text-[10px] tracking-[0.15em] text-neutral-500 mt-2 uppercase">Curated Portfolio — Private Garage Archive</p>
     </div>
     <div class="flex gap-2 flex-wrap">
       <button id="btn-cbr" class="bike-btn active-cbr font-grotesk text-[11px] font-medium tracking-[0.15em] px-6 py-2.5" onclick="selectBike('cbr')">
-        <span>01 / CBR 250RR</span>
+        <span>01 - CBR 250RR</span>
       </button>
       <button id="btn-zx" class="bike-btn font-grotesk text-[11px] font-medium tracking-[0.15em] px-6 py-2.5" onclick="selectBike('zx')">
-        <span>02 / ZX-25R</span>
+        <span>02 - ZX-25R</span>
       </button>
     </div>
   </div>
@@ -75,18 +79,21 @@ body { font-family: 'Inter', sans-serif; color: var(--text-main); letter-spacing
 <main class="px-6 md:px-12 pb-16 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start flex-grow">
   <div class="lg:col-span-3 flex flex-col gap-6">
 
-    <div class="border border-[var(--dark-border)] overflow-hidden" style="position:relative;">
-      <div class="floating-hud top-4 left-5" style="z-index:3;">PERSPECTIVE // DIGITAL_SHOWROOM</div>
-      <div class="floating-hud bottom-4 right-5" id="hud-model" style="z-index:3;">VEHICLE: CBR_250RR_2017</div>
+    <div class="border border-[var(--dark-border)] overflow-hidden style-container" style="position:relative;">
+      <div class="floating-hud top-4 left-5" style="z-index:3;">PERSPECTIVE DIGITAL_SHOWROOM</div>
+      <div class="floating-hud bottom-4 left-5" id="hud-model" style="z-index:3;">VEHICLE: CBR_250RR_2017</div>
       <div class="floating-hud top-4 right-5" style="z-index:3;">PHOTO STUDIO</div>
-      <div class="viewer-wrapper" id="viewer-wrapper">
-        <div class="viewer-loading" id="viewer-loading" style="display:none;opacity:0;">
-          <div class="loader-ring"></div>
-          <span class="font-grotesk text-[10px] tracking-widest text-neutral-500 uppercase">Loading Digital Asset...</span>
-        </div>
-        <img id="bike-display-img" alt="CBR 250RR Showcase" src="cbr1.jpg">
+      
+      <button class="nav-arrow prev" onclick="moveSlide(-1)" aria-label="Previous photo">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 height-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+      </button>
+      <button class="nav-arrow next" onclick="moveSlide(1)" aria-label="Next photo">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 height-5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+      </button>
+
+      <div class="viewer-container">
+        <div class="viewer-wrapper" id="viewer-wrapper"></div>
       </div>
-      <div id="photo-nav" class="flex gap-1.5 p-3" style="position:absolute; bottom:0; left:0; z-index:4;"></div>
     </div>
 
     <div class="stat-card p-5">
@@ -113,10 +120,10 @@ body { font-family: 'Inter', sans-serif; color: var(--text-main); letter-spacing
 
     <div class="stat-card p-6">
       <div class="flex items-center gap-3 mb-2">
-        <div id="bike-dot" class="w-1.5 height-1.5 rounded-full" style="background:#ffffff; height:6px;"></div>
+        <div id="bike-dot" class="w-1.5 rounded-full" style="background:#ffffff; height:6px;"></div>
         <span id="bike-name" class="font-grotesk text-base font-bold tracking-[0.15em] text-white uppercase">HONDA CBR 250RR</span>
       </div>
-      <div id="bike-year" class="font-grotesk text-[10px] tracking-widest mb-4 text-neutral-500 uppercase">2017 // GUNPOWDER BLACK METALLIC</div>
+      <div id="bike-year" class="font-grotesk text-[10px] tracking-widest mb-4 text-neutral-500 uppercase">2017 GUNPOWDER BLACK METALLIC</div>
       <div class="flex gap-2 flex-wrap">
         <span id="tag-engine" class="tag-badge border-neutral-700" style="color:var(--luxury-gold);">249.7cc TWIN</span>
         <span id="tag-type" class="tag-badge text-neutral-400 border-neutral-800">DOHC · TBW</span>
@@ -193,14 +200,14 @@ body { font-family: 'Inter', sans-serif; color: var(--text-main); letter-spacing
 </main>
 
 <footer class="border-t border-[var(--dark-border)] px-6 md:px-12 py-4 flex items-center justify-between bg-[#0b0b12]">
-  <span class="font-grotesk text-[9px] tracking-widest text-neutral-600 uppercase">ABEL'S DIGITAL GARAGE // PREMIUM VEHICLE SHOWCASE UI</span>
-  <span class="font-grotesk text-[9px] tracking-widest text-neutral-600 uppercase">RELEASE // VER 2.5</span>
+  <span class="font-grotesk text-[9px] tracking-widest text-neutral-600 uppercase">ABEL'S DIGITAL GARAGE PREMIUM VEHICLE SHOWCASE UI</span>
+  <span class="font-grotesk text-[9px] tracking-widest text-neutral-600 uppercase">RELEASE VER 2.5</span>
 </footer>
 
 <script>
 const BIKES = {
   cbr: {
-    name: 'HONDA CBR 250RR', year: '2017 // GUNPOWDER BLACK METALLIC',
+    name: 'HONDA CBR 250RR', year: '2017 GUNPOWDER BLACK METALLIC',
     tagEngine: '249.7cc TWIN', tagType: 'DOHC · TBW',
     hp: 36.3, hpRpm: '12,500', tq: 23.3, tqRpm: '10,500',
     rpm: 14000, gear: 2.928, gearSub: '14T / 41T SPROCKET',
@@ -217,7 +224,7 @@ const BIKES = {
     ],
   },
   zx: {
-    name: 'KAWASAKI ZX-25R', year: '2022 // BLUE METALLIC',
+    name: 'KAWASAKI ZX-25R', year: '2022 BLUE METALLIC',
     tagEngine: '249.8cc INLINE-4', tagType: 'DOHC · 16V',
     hp: 50, hpRpm: '15,500', tq: 22.9, tqRpm: '14,500',
     rpm: 17500, gear: 2.687, gearSub: '15T / 43T SPROCKET',
@@ -227,7 +234,7 @@ const BIKES = {
     hudModel: 'VEHICLE: ZX-25R_2022',
     photos: ['zx1.jpg', 'zx2.jpg', 'zx3.jpg'],
     specs: [
-      ['ENGINE TYPE','4-stroke · Inline-4 · DOHC'],['BORE × STRORE','50.0 × 31.8 mm'],
+      ['ENGINE TYPE','4-stroke · Inline-4 · DOHC'],['BORE × STROKE','50.0 × 31.8 mm'],
       ['COMPRESSION RATIO','11.5 : 1'],['INDUCTION SYSTEM','EFI · 30mm Throttle Bodies'],
       ['TRANSMISSION','6-Speed Return Type'],['FINAL DRIVE','Chain · Wet Multi-Disc Slipper'],
       ['CHASSIS STRUCTURE','Trellis · High-Tensile Steel'],['FRONT BREAKAGE','310mm Single Disc · 4-Piston'],['SEAT PROFILE','785 mm'],
@@ -237,6 +244,13 @@ const BIKES = {
 
 let currentBike = 'cbr';
 let currentPhotoIdx = 0;
+
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let isDragging = false;
+
+const wrapper = document.getElementById('viewer-wrapper');
 
 function setBar(id, pct) { document.getElementById(id).style.width = pct + '%'; }
 
@@ -263,34 +277,31 @@ function renderSpecList(specs) {
   ).join('');
 }
 
-function changePhoto(idx) {
-  const b = BIKES[currentBike];
-  currentPhotoIdx = idx;
-  const imgEl = document.getElementById('bike-display-img');
-  
-  imgEl.style.opacity = '0';
-  setTimeout(() => {
-    imgEl.src = b.photos[currentPhotoIdx];
-    imgEl.style.opacity = '1';
-  }, 200);
-
-  const navDots = document.querySelectorAll('.photo-dot');
-  navDots.forEach((dot, i) => {
-    dot.style.background = i === idx ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.1)';
-  });
+function updateSliderPosition() {
+  wrapper.style.transform = `translateX(${-currentPhotoIdx * 100}%)`;
 }
 
-function renderPhotoNav(photos) {
-  const navContainer = document.getElementById('photo-nav');
-  navContainer.innerHTML = photos.map((_, i) =>
-    `<button class="photo-dot" onclick="changePhoto(${i})" style="width:6px; height:6px; background:${i === 0 ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.1)'}; border-radius:50%; transition:all 0.2s; cursor:pointer;"></button>`
+function moveSlide(direction) {
+  const b = BIKES[currentBike];
+  currentPhotoIdx += direction;
+  if (currentPhotoIdx < 0) currentPhotoIdx = b.photos.length - 1;
+  if (currentPhotoIdx >= b.photos.length) currentPhotoIdx = 0;
+  updateSliderPosition();
+}
+
+function renderSlides(photos) {
+  wrapper.innerHTML = photos.map(src => 
+    `<div class="viewer-slide">
+      <img src="${src}" alt="Showcase Image">
+    </div>`
   ).join('');
+  currentPhotoIdx = 0;
+  updateSliderPosition();
 }
 
 function selectBike(id) {
   if (currentBike === id) return;
   currentBike = id;
-  currentPhotoIdx = 0;
   const b = BIKES[id];
 
   document.getElementById('btn-cbr').className = 'bike-btn font-grotesk text-[11px] font-medium tracking-[0.15em] px-6 py-2.5' + (id === 'cbr' ? ' active-cbr' : '');
@@ -304,12 +315,7 @@ function selectBike(id) {
   document.getElementById('tag-engine').textContent = b.tagEngine;
   document.getElementById('tag-type').textContent = b.tagType;
 
-  const imgEl = document.getElementById('bike-display-img');
-  imgEl.style.opacity = '0';
-  setTimeout(() => {
-    imgEl.src = b.photos[0];
-    imgEl.style.opacity = '1';
-  }, 200);
+  renderSlides(b.photos);
 
   animateCountTo('val-hp', b.hp, 1);
   animateCountTo('val-tq', b.tq, 1);
@@ -332,11 +338,56 @@ function selectBike(id) {
   }, 120);
 
   renderSpecList(b.specs);
-  renderPhotoNav(b.photos);
+}
+
+wrapper.addEventListener('touchstart', touchStart);
+wrapper.addEventListener('touchend', touchEnd);
+wrapper.addEventListener('touchmove', touchMove);
+wrapper.addEventListener('mousedown', touchStart);
+wrapper.addEventListener('mouseup', touchEnd);
+wrapper.addEventListener('mouseleave', touchEnd);
+wrapper.addEventListener('mousemove', touchMove);
+
+function touchStart(event) {
+  isDragging = true;
+  startX = getPositionX(event);
+  wrapper.style.transition = 'none';
+}
+
+function touchMove(event) {
+  if (!isDragging) return;
+  const currentX = getPositionX(event);
+  const diffX = currentX - startX;
+  const width = wrapper.parentElement.clientWidth;
+  const currentTranslate = (-currentPhotoIdx * width) + diffX;
+  wrapper.style.transform = `translateX(${currentTranslate}px)`;
+}
+
+function touchEnd(event) {
+  if (!isDragging) return;
+  isDragging = false;
+  const width = wrapper.parentElement.clientWidth;
+  const endX = event.type.includes('touch') ? event.changedTouches[0].clientX : event.clientX;
+  const diffX = endX - startX;
+
+  wrapper.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+
+  if (Math.abs(diffX) > width / 4) {
+    if (diffX > 0 && currentPhotoIdx > 0) {
+      currentPhotoIdx--;
+    } else if (diffX < 0 && currentPhotoIdx < BIKES[currentBike].photos.length - 1) {
+      currentPhotoIdx++;
+    }
+  }
+  updateSliderPosition();
+}
+
+function getPositionX(event) {
+  return event.type.includes('touch') ? event.touches[0].clientX : event.clientX;
 }
 
 window.selectBike = selectBike;
-window.changePhoto = changePhoto;
+window.moveSlide = moveSlide;
 
 document.addEventListener('DOMContentLoaded', () => {
   const clockEl = document.getElementById('live-clock');
@@ -344,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const b = BIKES.cbr;
   renderSpecList(b.specs);
-  renderPhotoNav(b.photos);
+  renderSlides(b.photos);
   setTimeout(() => {
     setBar('bar-hp', b.barHp); setBar('bar-tq', b.barTq);
     setBar('bar-rpm', b.barRpm); setBar('bar-gear', b.barGear);
