@@ -3,231 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MOTO_VAULT // Sport Bike Showcase</title>
+<title>Abel's Digital Garage // Premium Registry</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
---neon-cyan: #00f5ff;
---neon-magenta: #ff00aa;
---neon-yellow: #ffe600;
---neon-green: #39ff14;
---dark-bg: #050810;
---dark-card: #0a0f1e;
---dark-border: #1a2540;
---grid-color: rgba(0,245,255,0.04);
+--luxury-gold: #c5a880;
+--luxury-silver: #a3a3a3;
+--dark-bg: #0b0b0c;
+--dark-card: #121214;
+--dark-border: #222226;
+--text-main: #f3f4f6;
+--text-muted: #8e8e93;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; background: var(--dark-bg); overflow-x: hidden; }
-body { font-family: 'Exo 2', sans-serif; color: #c8d8f0; cursor: crosshair; }
-::-webkit-scrollbar { width: 4px; }
+body { font-family: 'Inter', sans-serif; color: var(--text-main); letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
+::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--dark-bg); }
-::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 2px; }
-.font-orb { font-family: 'Orbitron', monospace; }
-.font-mono { font-family: 'Share Tech Mono', monospace; }
-.bg-grid {
-background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
-background-size: 40px 40px;
-}
-.neon-cyan { color: var(--neon-cyan); }
-.neon-magenta { color: var(--neon-magenta); }
-.neon-yellow { color: var(--neon-yellow); }
-.neon-green { color: var(--neon-green); }
-.glitch-text { position: relative; animation: glitch-flicker 6s infinite; }
-.glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.glitch-text::before { color: var(--neon-magenta); animation: glitch-shift-1 6s infinite; clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
-.glitch-text::after { color: var(--neon-cyan); animation: glitch-shift-2 6s infinite; clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); }
-@keyframes glitch-flicker { 0%,94%,96%,100% { opacity:1; } 95% { opacity:0.8; } }
-@keyframes glitch-shift-1 { 0%,90%,100% { transform:translateX(0);opacity:0; } 92% { transform:translateX(-3px);opacity:0.7; } 94% { transform:translateX(3px);opacity:0.5; } }
-@keyframes glitch-shift-2 { 0%,90%,100% { transform:translateX(0);opacity:0; } 91% { transform:translateX(3px);opacity:0.7; } 93% { transform:translateX(-2px);opacity:0.5; } }
-.scan-line { position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--neon-cyan),transparent);opacity:0.12;animation:scan 9s linear infinite;pointer-events:none;z-index:9999; }
-@keyframes scan { from { top:-2px; } to { top:100%; } }
-.noise-overlay { position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.022;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");z-index:9998; }
-.corner-bracket { position:relative; }
-.corner-bracket::before,.corner-bracket::after { content:'';position:absolute;width:16px;height:16px;z-index:2; }
-.corner-bracket::before { top:0;left:0;border-top:2px solid var(--neon-cyan);border-left:2px solid var(--neon-cyan); }
-.corner-bracket::after { bottom:0;right:0;border-bottom:2px solid var(--neon-cyan);border-right:2px solid var(--neon-cyan); }
-.stat-card { background:var(--dark-card);border:1px solid var(--dark-border);transition:all 0.3s ease;position:relative;overflow:hidden; }
-.stat-card::before { content:'';position:absolute;top:0;left:-100%;width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--neon-cyan),transparent);transition:left 0.5s ease; }
-.stat-card:hover::before { left:100%; }
-.stat-card:hover { border-color:rgba(0,245,255,0.4);box-shadow:0 0 20px rgba(0,245,255,0.1);transform:translateY(-2px); }
-.bike-btn { background:var(--dark-card);border:1px solid var(--dark-border);transition:all 0.25s ease;cursor:pointer; }
-.bike-btn.active-cbr { border-color:var(--neon-cyan);background:rgba(0,245,255,0.07);box-shadow:0 0 16px rgba(0,245,255,0.2); }
-.bike-btn.active-zx { border-color:var(--neon-magenta);background:rgba(255,0,170,0.07);box-shadow:0 0 16px rgba(255,0,170,0.2); }
-.spec-bar-track { height:3px;background:rgba(0,245,255,0.08);border-radius:2px;overflow:hidden; }
-.spec-bar-fill { height:100%;border-radius:2px;transition:width 1.1s cubic-bezier(0.23,1,0.32,1); }
-.floating-hud { position:absolute;font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(0,245,255,0.3);pointer-events:none; }
-.tag-badge { display:inline-flex;align-items:center;font-family:'Share Tech Mono',monospace;font-size:10px;padding:2px 8px;border:1px solid;border-radius:2px; }
-.blink { animation:blink 1.4s step-end infinite; }
-@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
-.viewer-wrapper { position:relative;width:100%;padding-bottom:62%;background:radial-gradient(ellipse at 30% 60%,rgba(0,50,70,0.5) 0%,transparent 65%),radial-gradient(ellipse at 70% 30%,rgba(40,0,70,0.4) 0%,transparent 65%),var(--dark-bg);overflow:hidden;min-height:280px; }
-.viewer-wrapper iframe { position:absolute;top:0;left:0;width:100%;height:100%;border:none; }
-.viewer-loading { position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;pointer-events:none;z-index:1;transition:opacity 0.5s ease; }
-.loader-ring { width:48px;height:48px;border:2px solid rgba(0,245,255,0.1);border-top-color:var(--neon-cyan);border-radius:50%;animation:spin 0.9s linear infinite; }
-@keyframes spin { to { transform:rotate(360deg); } }
-@media (max-width:768px) { .viewer-wrapper { padding-bottom:78%; } }
+::-webkit-scrollbar-thumb { background: var(--luxury-silver); }
+.font-serif { font-family: 'Playfair Display', serif; }
+.font-grotesk { font-family: 'Space Grotesk', sans-serif; }
+.stat-card { background: var(--dark-card); border: 1px solid var(--dark-border); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+.stat-card:hover { border-color: #44444a; transform: translateY(-1px); }
+.bike-btn { background: var(--dark-card); border: 1px solid var(--dark-border); color: var(--text-muted); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; text-transform: uppercase; }
+.bike-btn:hover { color: var(--text-main); border-color: #44444a; }
+.bike-btn.active-cbr { border-color: var(--text-main); color: var(--text-main); background: #1c1c1e; }
+.bike-btn.active-zx { border-color: var(--text-main); color: var(--text-main); background: #1c1c1e; }
+.spec-bar-track { height: 1px; background: rgba(255,255,255,0.06); overflow: hidden; }
+.spec-bar-fill { height: 100%; background: var(--text-main); transition: width 1.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.floating-hud { position: absolute; font-family: 'Space Grotesk', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.15em; color: rgba(255,255,255,0.25); pointer-events: none; text-transform: uppercase; }
+.tag-badge { display: inline-flex; align-items: center; font-family: 'Space Grotesk', sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; padding: 3px 10px; border: 1px solid; border-radius: 0px; text-transform: uppercase; }
+.viewer-wrapper { position: relative; width: 100%; padding-bottom: 60%; background: radial-gradient(circle at 50% 50%, #1a1a1e 0%, var(--dark-bg) 80%); overflow: hidden; min-height: 300px; display: flex; align-items: center; justify-content: center; }
+.viewer-wrapper img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.viewer-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; pointer-events: none; z-index: 1; transition: opacity 0.5s ease; background: var(--dark-bg); }
+.loader-ring { width: 32px; height: 32px; border: 1px solid rgba(255,255,255,0.05); border-top-color: var(--text-main); border-radius: 50%; animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 768px) { .viewer-wrapper { padding-bottom: 75%; } }
 </style>
 </head>
-<body class="bg-grid min-h-screen">
-<div class="scan-line"></div>
-<div class="noise-overlay"></div>
+<body class="min-h-screen flex flex-col justify-between">
 
-<header class="border-b border-[var(--dark-border)] px-4 md:px-8 py-3 flex items-center justify-between sticky top-0 z-50" style="background:rgba(5,8,16,0.94);backdrop-filter:blur(14px);">
-  <div class="flex items-center gap-3">
-    <div class="w-2 h-2 rounded-full bg-[var(--neon-green)] blink"></div>
-    <span class="font-orb text-sm md:text-base tracking-widest neon-cyan">MOTO_VAULT</span>
-    <span class="font-mono text-xs text-gray-600 hidden md:inline">// SPORT BIKE SHOWCASE v2.5</span>
+<header class="border-b border-[var(--dark-border)] px-6 md:px-12 py-4 flex items-center justify-between sticky top-0 z-50" style="background:rgba(11,11,12,0.85); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);">
+  <div class="flex items-center gap-6">
+    <span class="font-grotesk text-xs font-bold tracking-[0.3em] uppercase">ABEL'S DIGITAL GARAGE</span>
+    <span class="font-grotesk text-[10px] tracking-widest text-neutral-600 hidden md:inline">/ HIGH PERFORMANCE SPECIFICATION REGISTER</span>
   </div>
-  <div class="flex items-center gap-4">
-    <span class="font-mono text-xs" style="color:rgba(0,245,255,0.4)">SYS:ONLINE</span>
-    <div id="live-clock" class="font-mono text-xs neon-cyan"></div>
+  <div class="flex items-center gap-6">
+    <span class="font-grotesk text-[10px] tracking-widest text-neutral-500">CONNECTED</span>
+    <div id="live-clock" class="font-grotesk text-xs font-medium tracking-widest text-neutral-400"></div>
   </div>
 </header>
 
-<div class="px-4 md:px-8 py-4">
-  <div class="mb-5 text-center md:text-left">
-    <h1 class="glitch-text font-orb text-3xl md:text-5xl font-black tracking-tight neon-cyan inline-block" data-text="GARAGE.SYS">GARAGE.SYS</h1>
-    <p class="font-mono text-xs md:text-sm mt-1" style="color:rgba(200,216,240,0.4)">// PERSONAL COLLECTION — 2× MACHINES INDEXED</p>
-  </div>
-  <div class="flex gap-3 mb-5 flex-wrap">
-    <button id="btn-cbr" class="bike-btn active-cbr font-orb text-xs md:text-sm px-4 py-2 rounded tracking-wider" onclick="selectBike('cbr')">
-      <span class="neon-cyan">01</span> <span class="ml-1">CBR 250RR</span>
-    </button>
-    <button id="btn-zx" class="bike-btn font-orb text-xs md:text-sm px-4 py-2 rounded tracking-wider" onclick="selectBike('zx')">
-      <span style="color:var(--neon-magenta)">02</span> <span class="ml-1">ZX-25R</span>
-    </button>
+<div class="px-6 md:px-12 pt-8 pb-4">
+  <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div>
+      <h1 class="font-serif text-4xl md:text-5xl font-normal tracking-tight text-white italic">The Collection.</h1>
+      <p class="font-grotesk text-[10px] tracking-[0.15em] text-neutral-500 mt-2 uppercase">/ Curated Portfolio — Private Garage Archive</p>
+    </div>
+    <div class="flex gap-2 flex-wrap">
+      <button id="btn-cbr" class="bike-btn active-cbr font-grotesk text-[11px] font-medium tracking-[0.15em] px-6 py-2.5" onclick="selectBike('cbr')">
+        <span>01 / CBR 250RR</span>
+      </button>
+      <button id="btn-zx" class="bike-btn font-grotesk text-[11px] font-medium tracking-[0.15em] px-6 py-2.5" onclick="selectBike('zx')">
+        <span>02 / ZX-25R</span>
+      </button>
+    </div>
   </div>
 </div>
 
-<main class="px-4 md:px-8 pb-10 grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
-  <div class="lg:col-span-3 flex flex-col gap-4">
+<main class="px-6 md:px-12 pb-16 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start flex-grow">
+  <div class="lg:col-span-3 flex flex-col gap-6">
 
-    <div class="corner-bracket rounded-sm border border-[var(--dark-border)] overflow-hidden" style="position:relative;">
-      <div class="floating-hud top-3 left-4" style="z-index:3;">CAM_01 // INTERACTIVE_3D</div>
-      <div class="floating-hud bottom-3 right-4" id="hud-model" style="z-index:3;">MODEL: CBR_250RR_2017</div>
-      <div class="floating-hud top-3 right-4" style="z-index:3;">DRAG · SCROLL · ZOOM</div>
+    <div class="border border-[var(--dark-border)] overflow-hidden" style="position:relative;">
+      <div class="floating-hud top-4 left-5" style="z-index:3;">PERSPECTIVE // DIGITAL_SHOWROOM</div>
+      <div class="floating-hud bottom-4 right-5" id="hud-model" style="z-index:3;">VEHICLE: CBR_250RR_2017</div>
+      <div class="floating-hud top-4 right-5" style="z-index:3;">PHOTO STUDIO</div>
       <div class="viewer-wrapper" id="viewer-wrapper">
-        <div class="viewer-loading" id="viewer-loading">
+        <div class="viewer-loading" id="viewer-loading" style="display:none;opacity:0;">
           <div class="loader-ring"></div>
-          <span class="font-mono text-xs" style="color:rgba(0,245,255,0.5)">LOADING 3D MODEL...</span>
+          <span class="font-grotesk text-[10px] tracking-widest text-neutral-500 uppercase">Loading Digital Asset...</span>
         </div>
-        <iframe
-          id="sketchfab-iframe"
-          title="CBR 250RR 3D Model"
-          allow="autoplay; fullscreen; xr-spatial-tracking"
-          src="https://sketchfab.com/models/de9e3e5a96cd4db3afa5a36c62248438/embed?autospin=0.3&autostart=1&preload=1&ui_theme=dark&ui_watermark=0&ui_infos=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=1&ui_annotations=0&dnt=1"
-          onload="onIframeLoad()"
-          style="opacity:0;transition:opacity 0.6s ease;">
-        </iframe>
+        <img id="bike-display-img" alt="CBR 250RR Showcase" src="cbr1.jpg">
       </div>
+      <div id="photo-nav" class="flex gap-1.5 p-3" style="position:absolute; bottom:0; left:0; z-index:4;"></div>
     </div>
 
-    <div class="stat-card rounded-sm p-4 border">
-      <div class="font-orb text-xs tracking-widest mb-3" style="color:rgba(0,245,255,0.55)">3D_CONTROLS</div>
-      <div class="grid grid-cols-3 gap-3 font-mono text-xs" style="color:rgba(200,216,240,0.5)">
-        <div class="flex flex-col items-center gap-1 p-2 rounded" style="background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.08)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(0,245,255,0.6)" stroke-width="2"><path d="M5 9l7-7 7 7M5 15l7 7 7-7"/></svg>
-          <span>DRAG</span><span style="color:rgba(0,245,255,0.35)">ROTATE</span>
+    <div class="stat-card p-5">
+      <div class="font-grotesk text-[10px] font-bold tracking-[0.2em] mb-4 text-neutral-500 uppercase">VAULT_GUIDE</div>
+      <div class="grid grid-cols-3 gap-4 font-grotesk text-[10px] tracking-wider text-neutral-400">
+        <div class="flex flex-col items-start gap-1 p-3 border border-[#1c1c1e] bg-[#0e0e10]">
+          <span class="text-white font-medium uppercase">Select Index</span>
+          <span class="text-neutral-500 text-[9px] uppercase">Switch Vehicle Data</span>
         </div>
-        <div class="flex flex-col items-center gap-1 p-2 rounded" style="background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.08)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(0,245,255,0.6)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 5v2M12 17v2M5 12H3M21 12h-2"/></svg>
-          <span>SCROLL</span><span style="color:rgba(0,245,255,0.35)">ZOOM</span>
+        <div class="flex flex-col items-start gap-1 p-3 border border-[#1c1c1e] bg-[#0e0e10]">
+          <span class="text-white font-medium uppercase">Metrics Display</span>
+          <span class="text-neutral-500 text-[9px] uppercase">Real-Time Sync</span>
         </div>
-        <div class="flex flex-col items-center gap-1 p-2 rounded" style="background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.08)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(0,245,255,0.6)" stroke-width="2"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m8 0h3a2 2 0 002-2v-3"/></svg>
-          <span>RIGHT-DRAG</span><span style="color:rgba(0,245,255,0.35)">PAN</span>
+        <div class="flex flex-col items-start gap-1 p-3 border border-[#1c1c1e] bg-[#0e0e10]">
+          <span class="text-white font-medium uppercase">Architecture</span>
+          <span class="text-neutral-500 text-[9px] uppercase">Official Manufacturer Specs</span>
         </div>
       </div>
     </div>
 
   </div>
 
-  <div class="lg:col-span-2 flex flex-col gap-4">
+  <div class="lg:col-span-2 flex flex-col gap-6">
 
-    <div class="stat-card rounded-sm p-4 border">
-      <div class="flex items-center gap-2 mb-1">
-        <div id="bike-dot" class="w-2 h-2 rounded-full" style="background:var(--neon-cyan)"></div>
-        <span id="bike-name" class="font-orb text-sm tracking-widest neon-cyan">HONDA CBR 250RR</span>
+    <div class="stat-card p-6">
+      <div class="flex items-center gap-3 mb-2">
+        <div id="bike-dot" class="w-1.5 height-1.5 rounded-full" style="background:#ffffff; height:6px;"></div>
+        <span id="bike-name" class="font-grotesk text-base font-bold tracking-[0.15em] text-white uppercase">HONDA CBR 250RR</span>
       </div>
-      <div id="bike-year" class="font-mono text-xs mb-2" style="color:rgba(200,216,240,0.4)">2017 // GUNPOWDER BLACK METALLIC</div>
+      <div id="bike-year" class="font-grotesk text-[10px] tracking-widest mb-4 text-neutral-500 uppercase">2017 // GUNPOWDER BLACK METALLIC</div>
       <div class="flex gap-2 flex-wrap">
-        <span id="tag-engine" class="tag-badge neon-cyan" style="border-color:var(--neon-cyan)">249.7cc TWIN</span>
-        <span id="tag-type" class="tag-badge" style="color:var(--neon-magenta);border-color:var(--neon-magenta)">DOHC · TBW</span>
+        <span id="tag-engine" class="tag-badge border-neutral-700" style="color:var(--luxury-gold);">249.7cc TWIN</span>
+        <span id="tag-type" class="tag-badge text-neutral-400 border-neutral-800">DOHC · TBW</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-3">
-      <div class="stat-card rounded-sm p-4 border">
-        <div class="font-mono text-xs mb-2" style="color:rgba(0,245,255,0.5)">HORSEPOWER</div>
-        <div id="val-hp" class="font-orb text-3xl font-black neon-cyan leading-none">36.3</div>
-        <div class="font-mono text-xs mt-1 text-gray-600">HP @ <span id="hp-rpm">12,500</span> RPM</div>
-        <div class="spec-bar-track mt-3"><div id="bar-hp" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#00f5ff,#88eeff)"></div></div>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="stat-card p-5">
+        <div class="font-grotesk text-[10px] font-bold tracking-widest mb-2 text-neutral-500 uppercase">HORSEPOWER</div>
+        <div id="val-hp" class="font-serif text-3xl font-normal text-white leading-none italic">36.3</div>
+        <div class="font-grotesk text-[10px] tracking-wider mt-2 text-neutral-500 uppercase">BHP @ <span id="hp-rpm" class="text-neutral-300">12,500</span> RPM</div>
+        <div class="spec-bar-track mt-4"><div id="bar-hp" class="spec-bar-fill" style="width:0%;"></div></div>
       </div>
-      <div class="stat-card rounded-sm p-4 border">
-        <div class="font-mono text-xs mb-2" style="color:rgba(255,0,170,0.6)">TORQUE</div>
-        <div id="val-tq" class="font-orb text-3xl font-black leading-none" style="color:var(--neon-magenta)">23.3</div>
-        <div class="font-mono text-xs mt-1 text-gray-600">Nm @ <span id="tq-rpm">10,500</span> RPM</div>
-        <div class="spec-bar-track mt-3"><div id="bar-tq" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#ff00aa,#ff66cc)"></div></div>
+      <div class="stat-card p-5">
+        <div class="font-grotesk text-[10px] font-bold tracking-widest mb-2 text-neutral-500 uppercase">TORQUE</div>
+        <div id="val-tq" class="font-serif text-3xl font-normal text-white leading-none italic">23.3</div>
+        <div class="font-grotesk text-[10px] tracking-wider mt-2 text-neutral-500 uppercase">NM @ <span id="tq-rpm" class="text-neutral-300">10,500</span> RPM</div>
+        <div class="spec-bar-track mt-4"><div id="bar-tq" class="spec-bar-fill" style="width:0%;"></div></div>
       </div>
-      <div class="stat-card rounded-sm p-4 border">
-        <div class="font-mono text-xs mb-2" style="color:rgba(255,230,0,0.6)">REDLINE RPM</div>
-        <div id="val-rpm" class="font-orb text-3xl font-black leading-none" style="color:var(--neon-yellow)">14,000</div>
-        <div class="font-mono text-xs mt-1 text-gray-600">MAX REV LIMIT</div>
-        <div class="spec-bar-track mt-3"><div id="bar-rpm" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#ffe600,#ffb300)"></div></div>
+      <div class="stat-card p-5">
+        <div class="font-grotesk text-[10px] font-bold tracking-widest mb-2 text-neutral-500 uppercase">REDLINE LIMIT</div>
+        <div id="val-rpm" class="font-grotesk text-2xl font-bold text-white leading-none tracking-wide">14,000</div>
+        <div class="font-grotesk text-[10px] tracking-wider mt-2 text-neutral-500 uppercase">MAX OPERATIONAL RPM</div>
+        <div class="spec-bar-track mt-4"><div id="bar-rpm" class="spec-bar-fill" style="width:0%;"></div></div>
       </div>
-      <div class="stat-card rounded-sm p-4 border">
-        <div class="font-mono text-xs mb-2" style="color:rgba(57,255,20,0.6)">FINAL GEAR</div>
-        <div id="val-gear" class="font-orb text-3xl font-black leading-none" style="color:var(--neon-green)">2.928</div>
-        <div class="font-mono text-xs mt-1 text-gray-600" id="gear-sub">14T / 41T SPROCKET</div>
-        <div class="spec-bar-track mt-3"><div id="bar-gear" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#39ff14,#88ff44)"></div></div>
-      </div>
-    </div>
-
-    <div class="stat-card rounded-sm p-4 border">
-      <div class="font-orb text-xs tracking-widest mb-3" style="color:rgba(0,245,255,0.6)">PERFORMANCE_INDEX</div>
-      <div class="space-y-3">
-        <div>
-          <div class="flex justify-between font-mono text-xs mb-1">
-            <span style="color:rgba(200,216,240,0.5)">TOP SPEED</span>
-            <span id="val-topspeed" class="neon-cyan">179 km/h</span>
-          </div>
-          <div class="spec-bar-track"><div id="bar-spd" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#00f5ff,#0066ff)"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between font-mono text-xs mb-1">
-            <span style="color:rgba(200,216,240,0.5)">DISPLACEMENT</span>
-            <span id="val-disp" class="neon-cyan">249.7 cc</span>
-          </div>
-          <div class="spec-bar-track"><div id="bar-disp" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#00f5ff,#0066ff)"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between font-mono text-xs mb-1">
-            <span style="color:rgba(200,216,240,0.5)">WET WEIGHT</span>
-            <span id="val-weight" class="neon-cyan">168 kg</span>
-          </div>
-          <div class="spec-bar-track"><div id="bar-wt" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#00f5ff,#0066ff)"></div></div>
-        </div>
-        <div>
-          <div class="flex justify-between font-mono text-xs mb-1">
-            <span style="color:rgba(200,216,240,0.5)">0–100 km/h</span>
-            <span id="val-accel" class="neon-cyan">~5.8 s</span>
-          </div>
-          <div class="spec-bar-track"><div id="bar-acc" class="spec-bar-fill" style="width:0%;background:linear-gradient(90deg,#00f5ff,#0066ff)"></div></div>
-        </div>
+      <div class="stat-card p-5">
+        <div class="font-grotesk text-[10px] font-bold tracking-widest mb-2 text-neutral-500 uppercase">FINAL TRANSMISSION</div>
+        <div id="val-gear" class="font-grotesk text-2xl font-bold text-white leading-none tracking-wide">2.928</div>
+        <div class="font-grotesk text-[10px] tracking-wider mt-2 text-neutral-500 uppercase" id="gear-sub">14T / 41T SPROCKET</div>
+        <div class="spec-bar-track mt-4"><div id="bar-gear" class="spec-bar-fill" style="width:0%;"></div></div>
       </div>
     </div>
 
-    <div class="stat-card rounded-sm p-4 border">
-      <div class="font-orb text-xs tracking-widest mb-3" style="color:rgba(0,245,255,0.6)">ENGINE_DETAIL</div>
-      <div id="spec-list" class="space-y-1 font-mono text-xs"></div>
+    <div class="stat-card p-5">
+      <div class="font-grotesk text-[10px] font-bold tracking-[0.2em] mb-4 text-neutral-500 uppercase">PERFORMANCE METRICS</div>
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between font-grotesk text-[10px] tracking-wider mb-1.5">
+            <span class="text-neutral-400 uppercase">V-MAX TOP SPEED</span>
+            <span id="val-topspeed" class="text-white font-medium">179 km/h</span>
+          </div>
+          <div class="spec-bar-track"><div id="bar-spd" class="spec-bar-fill" style="width:0%;"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between font-grotesk text-[10px] tracking-wider mb-1.5">
+            <span class="text-neutral-400 uppercase">TOTAL DISPLACEMENT</span>
+            <span id="val-disp" class="text-white font-medium">249.7 cc</span>
+          </div>
+          <div class="spec-bar-track"><div id="bar-disp" class="spec-bar-fill" style="width:0%;"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between font-grotesk text-[10px] tracking-wider mb-1.5">
+            <span class="text-neutral-400 uppercase">CURB WET WEIGHT</span>
+            <span id="val-weight" class="text-white font-medium">168 kg</span>
+          </div>
+          <div class="spec-bar-track"><div id="bar-wt" class="spec-bar-fill" style="width:0%;"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between font-grotesk text-[10px] tracking-wider mb-1.5">
+            <span class="text-neutral-400 uppercase">VELOCITY ACCELERATION (0–100 km/h)</span>
+            <span id="val-accel" class="text-white font-medium">~5.8 s</span>
+          </div>
+          <div class="spec-bar-track"><div id="bar-acc" class="spec-bar-fill" style="width:0%;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-card p-5">
+      <div class="font-grotesk text-[10px] font-bold tracking-[0.2em] mb-3 text-neutral-500 uppercase">POWERTRAIN & ARCHITECTURE</div>
+      <div id="spec-list" class="space-y-0 font-grotesk text-[11px] tracking-wide"></div>
     </div>
 
   </div>
 </main>
 
-<footer class="border-t border-[var(--dark-border)] px-4 md:px-8 py-3 flex items-center justify-between">
-  <span class="font-mono text-xs" style="color:rgba(0,245,255,0.2)">MOTO_VAULT // 3D VIA SKETCHFAB · SPECS FROM MANUFACTURER</span>
-  <span class="font-mono text-xs" style="color:rgba(0,245,255,0.2)">BUILD 2025.05</span>
+<footer class="border-t border-[var(--dark-border)] px-6 md:px-12 py-4 flex items-center justify-between bg-[#0b0b12]">
+  <span class="font-grotesk text-[9px] tracking-widest text-neutral-600 uppercase">ABEL'S DIGITAL GARAGE // PREMIUM VEHICLE SHOWCASE UI</span>
+  <span class="font-grotesk text-[9px] tracking-widest text-neutral-600 uppercase">RELEASE // VER 2.5</span>
 </footer>
 
 <script>
@@ -239,14 +206,14 @@ const BIKES = {
     rpm: 14000, gear: 2.928, gearSub: '14T / 41T SPROCKET',
     topSpeed: '179 km/h', disp: '249.7 cc', weight: '168 kg', accel: '~5.8 s',
     barHp: 36, barTq: 51, barRpm: 80, barGear: 65, barSpd: 72, barDisp: 50, barWt: 55, barAcc: 72,
-    dotColor: 'var(--neon-cyan)', nameColor: 'var(--neon-cyan)',
-    hudModel: 'MODEL: CBR_250RR_2017',
-    sketchfabUrl: 'https://sketchfab.com/models/de9e3e5a96cd4db3afa5a36c62248438/embed?autospin=0.3&autostart=1&preload=1&ui_theme=dark&ui_watermark=0&ui_infos=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=1&ui_annotations=0&dnt=1',
+    dotColor: '#ffffff', nameColor: '#ffffff',
+    hudModel: 'VEHICLE: CBR_250RR_2017',
+    photos: ['cbr1.jpg', 'cbr2.jpg'],
     specs: [
-      ['ENGINE','4-stroke · Parallel Twin · DOHC'],['BORE × STROKE','62.3 × 41.4 mm'],
-      ['COMPRESSION','11.5 : 1'],['INDUCTION','PGM-FI · Throttle-By-Wire'],
+      ['ENGINE TYPE','4-stroke · Parallel Twin · DOHC'],['BORE × STROKE','62.3 × 41.4 mm'],
+      ['COMPRESSION RATIO','11.5 : 1'],['INDUCTION SYSTEM','PGM-FI · Throttle-By-Wire'],
       ['TRANSMISSION','6-Speed Constant Mesh'],['FINAL DRIVE','#520 O-Ring Sealed Chain'],
-      ['FRAME','Steel Truss Frame'],['FRONT BRAKE','310mm Single Disc · 2-Piston'],['SEAT HEIGHT','790 mm'],
+      ['CHASSIS STRUCTURE','Steel Truss Architecture'],['FRONT BREAKAGE','310mm Single Disc · 2-Piston'],['SEAT PROFILE','790 mm'],
     ],
   },
   zx: {
@@ -256,27 +223,20 @@ const BIKES = {
     rpm: 17500, gear: 2.687, gearSub: '15T / 43T SPROCKET',
     topSpeed: '190 km/h', disp: '249.8 cc', weight: '184 kg', accel: '~6.0 s',
     barHp: 50, barTq: 46, barRpm: 100, barGear: 55, barSpd: 76, barDisp: 50, barWt: 60, barAcc: 70,
-    dotColor: 'var(--neon-magenta)', nameColor: 'var(--neon-magenta)',
-    hudModel: 'MODEL: ZX-25R_2022',
-    sketchfabUrl: 'https://sketchfab.com/models/42bf130dd4b74619bb77f91142cd144e/embed?autospin=0.3&autostart=1&preload=1&ui_theme=dark&ui_watermark=0&ui_infos=0&ui_inspector=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=1&ui_annotations=0&dnt=1',
+    dotColor: '#ffffff', nameColor: '#ffffff',
+    hudModel: 'VEHICLE: ZX-25R_2022',
+    photos: ['zx1.jpg', 'zx2.jpg', 'zx3.jpg'],
     specs: [
-      ['ENGINE','4-stroke · Inline-4 · DOHC'],['BORE × STROKE','50.0 × 31.8 mm'],
-      ['COMPRESSION','11.5 : 1'],['INDUCTION','EFI · 30mm Throttle Bodies'],
+      ['ENGINE TYPE','4-stroke · Inline-4 · DOHC'],['BORE × STRORE','50.0 × 31.8 mm'],
+      ['COMPRESSION RATIO','11.5 : 1'],['INDUCTION SYSTEM','EFI · 30mm Throttle Bodies'],
       ['TRANSMISSION','6-Speed Return Type'],['FINAL DRIVE','Chain · Wet Multi-Disc Slipper'],
-      ['FRAME','Trellis · High-Tensile Steel'],['FRONT BRAKE','310mm Single Disc · 4-Piston'],['SEAT HEIGHT','785 mm'],
+      ['CHASSIS STRUCTURE','Trellis · High-Tensile Steel'],['FRONT BREAKAGE','310mm Single Disc · 4-Piston'],['SEAT PROFILE','785 mm'],
     ],
   },
 };
 
 let currentBike = 'cbr';
-
-function onIframeLoad() {
-  const iframe = document.getElementById('sketchfab-iframe');
-  const loading = document.getElementById('viewer-loading');
-  iframe.style.opacity = '1';
-  loading.style.opacity = '0';
-  setTimeout(() => { loading.style.display = 'none'; }, 600);
-}
+let currentPhotoIdx = 0;
 
 function setBar(id, pct) { document.getElementById(id).style.width = pct + '%'; }
 
@@ -296,20 +256,45 @@ function animateCountTo(id, target, decimals) {
 
 function renderSpecList(specs) {
   document.getElementById('spec-list').innerHTML = specs.map(([k,v]) =>
-    `<div class="flex justify-between gap-2 py-1 border-b" style="border-color:rgba(26,37,64,0.6)">
-      <span style="color:rgba(0,245,255,0.45)">${k}</span>
-      <span class="text-right" style="color:#c8d8f0">${v}</span>
+    `<div class="flex justify-between gap-4 py-2 border-b border-neutral-900" style="align-items: center;">
+      <span class="text-neutral-500 font-medium uppercase text-[10px] tracking-wider">${k}</span>
+      <span class="text-right text-neutral-300 font-light">${v}</span>
     </div>`
+  ).join('');
+}
+
+function changePhoto(idx) {
+  const b = BIKES[currentBike];
+  currentPhotoIdx = idx;
+  const imgEl = document.getElementById('bike-display-img');
+  
+  imgEl.style.opacity = '0';
+  setTimeout(() => {
+    imgEl.src = b.photos[currentPhotoIdx];
+    imgEl.style.opacity = '1';
+  }, 200);
+
+  const navDots = document.querySelectorAll('.photo-dot');
+  navDots.forEach((dot, i) => {
+    dot.style.background = i === idx ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.1)';
+  });
+}
+
+function renderPhotoNav(photos) {
+  const navContainer = document.getElementById('photo-nav');
+  navContainer.innerHTML = photos.map((_, i) =>
+    `<button class="photo-dot" onclick="changePhoto(${i})" style="width:6px; height:6px; background:${i === 0 ? 'rgba(255,255,255,0.8)' : 'rgba(255,255,255,0.1)'}; border-radius:50%; transition:all 0.2s; cursor:pointer;"></button>`
   ).join('');
 }
 
 function selectBike(id) {
   if (currentBike === id) return;
   currentBike = id;
+  currentPhotoIdx = 0;
   const b = BIKES[id];
 
-  document.getElementById('btn-cbr').className = 'bike-btn font-orb text-xs md:text-sm px-4 py-2 rounded tracking-wider' + (id === 'cbr' ? ' active-cbr' : '');
-  document.getElementById('btn-zx').className = 'bike-btn font-orb text-xs md:text-sm px-4 py-2 rounded tracking-wider' + (id === 'zx' ? ' active-zx' : '');
+  document.getElementById('btn-cbr').className = 'bike-btn font-grotesk text-[11px] font-medium tracking-[0.15em] px-6 py-2.5' + (id === 'cbr' ? ' active-cbr' : '');
+  document.getElementById('btn-zx').className = 'bike-btn font-grotesk text-[11px] font-medium tracking-[0.15em] px-6 py-2.5' + (id === 'zx' ? ' active-zx' : '');
 
   document.getElementById('hud-model').textContent = b.hudModel;
   document.getElementById('bike-dot').style.background = b.dotColor;
@@ -319,20 +304,12 @@ function selectBike(id) {
   document.getElementById('tag-engine').textContent = b.tagEngine;
   document.getElementById('tag-type').textContent = b.tagType;
 
-  if (id === 'zx') {
-    document.getElementById('tag-engine').style.cssText = 'color:var(--neon-magenta);border-color:var(--neon-magenta)';
-    document.getElementById('tag-type').style.cssText = 'color:var(--neon-cyan);border-color:var(--neon-cyan)';
-  } else {
-    document.getElementById('tag-engine').style.cssText = 'color:var(--neon-cyan);border-color:var(--neon-cyan)';
-    document.getElementById('tag-type').style.cssText = 'color:var(--neon-magenta);border-color:var(--neon-magenta)';
-  }
-
-  const iframe = document.getElementById('sketchfab-iframe');
-  const loading = document.getElementById('viewer-loading');
-  loading.style.display = 'flex';
-  loading.style.opacity = '1';
-  iframe.style.opacity = '0';
-  iframe.src = b.sketchfabUrl;
+  const imgEl = document.getElementById('bike-display-img');
+  imgEl.style.opacity = '0';
+  setTimeout(() => {
+    imgEl.src = b.photos[0];
+    imgEl.style.opacity = '1';
+  }, 200);
 
   animateCountTo('val-hp', b.hp, 1);
   animateCountTo('val-tq', b.tq, 1);
@@ -355,10 +332,11 @@ function selectBike(id) {
   }, 120);
 
   renderSpecList(b.specs);
+  renderPhotoNav(b.photos);
 }
 
 window.selectBike = selectBike;
-window.onIframeLoad = onIframeLoad;
+window.changePhoto = changePhoto;
 
 document.addEventListener('DOMContentLoaded', () => {
   const clockEl = document.getElementById('live-clock');
@@ -366,6 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const b = BIKES.cbr;
   renderSpecList(b.specs);
+  renderPhotoNav(b.photos);
   setTimeout(() => {
     setBar('bar-hp', b.barHp); setBar('bar-tq', b.barTq);
     setBar('bar-rpm', b.barRpm); setBar('bar-gear', b.barGear);
